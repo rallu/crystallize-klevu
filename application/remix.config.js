@@ -2,7 +2,7 @@
  * @type {import('@remix-run/dev').AppConfig}
  */
 module.exports = {
-    serverDependenciesToBundle: ["@klevu/ui-react"],
+    // serverDependenciesToBundle: ["@klevu/ui-react"],
     ignoredRouteFiles: ['.*'],
     appDirectory: 'src',
     devServerPort: 3019,

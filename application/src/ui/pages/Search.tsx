@@ -3,28 +3,29 @@ import { useAppContext } from '../app-context/provider';
 import { ProductSlim } from '~/use-cases/contracts/Product';
 import { FilterManager, KlevuApiRawResponse, KlevuDomEvents, KlevuFetch, KlevuFetchQueryResult, KlevuHydratePackedFetchResult, KlevuListenDomEvent, KlevuRecord, search } from '@klevu/core';
 import { useEffect, useState } from 'react';
-import { KlevuFacetList, KlevuPagination, KlevuProduct, KlevuProductGrid } from '@klevu/ui-react';
+import { KlevuFacetList, KlevuPagination, KlevuProduct, KlevuProductGrid, KlevuSearchLandingPage } from '@klevu/ui-react';
 import { LinksFunction } from '@remix-run/node';
 import { basicSearch } from '~/use-cases/search/basicsearch';
 
 const manager = new FilterManager()
 
-export default ({ data } : { data: KlevuApiRawResponse}) => {
+export default ({ data } : { data: { response: KlevuApiRawResponse, searchTerm: string}}) => {
     const { _t } = useAppContext();
+    
+    /*
     const [products, setProducts] = useState<KlevuRecord[]>([])
     const [result, setResult] = useState<KlevuFetchQueryResult | undefined>(undefined)
     const [pageIndex, setPageIndex] = useState(0)
 
     const unpackServerResults = async () => {
-        const p = new URLSearchParams(window.location.search);
-        const res = await KlevuHydratePackedFetchResult(data, basicSearch(p.get("q") ?? '', pageIndex, manager))
+        
+        const res = await KlevuHydratePackedFetchResult(data, basicSearch(params.get("q") ?? '', pageIndex, manager))
         setResult(res.queriesById("search"))
         setProducts(res.queriesById("search")?.records ?? [])
     }
 
     const doSearch = async () => {
-        const p = new URLSearchParams(window.location.search);
-        const res = await KlevuFetch(...basicSearch(p.get('q') ?? '', pageIndex, manager))
+        const res = await KlevuFetch(...basicSearch(params.get('q') ?? '', pageIndex, manager))
         setResult(res.queriesById("search"))
         setProducts(res.queriesById("search")?.records ?? [])
     }
@@ -37,10 +38,12 @@ export default ({ data } : { data: KlevuApiRawResponse}) => {
             stop()
         }
     }, [])
+    */
 
     return (
         <div className="container px-6 mx-auto w-full">
-            <h1 className="font-bold text-4xl mt-10">{_t('search.label')}</h1>
+            <KlevuSearchLandingPage term={data.searchTerm} />
+            {/* 
             <div className="flex">
                 <KlevuFacetList manager={manager} />
                 <KlevuProductGrid className="px-8">
@@ -55,6 +58,7 @@ export default ({ data } : { data: KlevuApiRawResponse}) => {
                     }} queryResult={result} />
                 </div>
             ) : null}
+            */}
         </div>
     );
 };

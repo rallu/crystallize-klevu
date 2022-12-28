@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const result = await KlevuFetch(...basicSearch(params ?? '', 0, new FilterManager()))
     const data = KlevuPackFetchResult(result)
     return json(
-        { data },
+        { data: { response: data, searchTerm: params } },
         StoreFrontAwaretHttpCacheHeaderTagger('15s', '1w', ['search'], shared.config.tenantIdentifier),
     );
 };

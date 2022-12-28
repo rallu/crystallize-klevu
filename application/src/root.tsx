@@ -210,6 +210,7 @@ const Document: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Favicons: React.FC = () => {
     const { path } = useAppContext();
+    return null
     const linkTags = Object.entries(FAVICON_VARIANTS).map(([variant, meta]) => {
         const extra = meta.extra ?? {};
         return (

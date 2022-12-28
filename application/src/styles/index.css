@@ -683,3 +683,31 @@
         }
     }
 }
+
+:root {
+    --klevu-h1-size: 1.5rem;
+    --klevu-h1-weight: bold;
+    --klevu-h1-color: black;
+    --klevu-h2-size: 1.2rem;
+    --klevu-h2-weight: bold;
+    --klevu-h2-color: black;
+    --klevu-h3-size: 1.1rem;
+    --klevu-h3-weight: normal;
+    --klevu-h3-color: black;
+    --klevu-color-primary: #000000;
+    --klevu-color-primary-border: #2c2c2c;
+    --klevu-color-primary-text: #ffffff;
+    --klevu-color-border: rgba(223, 223, 223, var(--tw-border-opacity, 1));
+    --klevu-color-dim-background: #fafafa;
+    --klevu-color-dim-text: #666666;
+    --klevu-color-shadow: rgba(71, 71, 71, 0.35);
+    --klevu-rounded-corners: 4px;
+    --klevu-spacing-small: 4px;
+    --klevu-spacing-normal: 8px;
+    --klevu-spacing-large: 12px;
+    --klevu-product-image-aspect-ratio: 1 / 1.2;
+    --klevu-product-width: 300px;
+    --klevu-product-small-width: 200px;
+    --klevu-product-image-fill: cover; /* cover, contain */
+  }
+  
