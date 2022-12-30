@@ -6,7 +6,7 @@ export function basicSearch(term: string, pageIndex: number, manager: FilterMana
             term ?? '',
             { limit: 24, offset: pageIndex * 24 },
             applyFilterWithManager(manager),
-            listFilters({ filterManager: manager }),
+            listFilters({ filterManager: manager, rangeFilterSettings: [{ key: 'klevu_price', minMax: true }] }),
             sendSearchEvent(),
         ),
     ];

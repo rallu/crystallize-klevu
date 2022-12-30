@@ -24,23 +24,6 @@ export const KlevuFilter: React.FC<{ manager: FilterManager }> = ({ manager }) =
                 ref={formRef}
                 className="flex gap-4 flex-wrap"
             >
-                <label>
-                    <select
-                        name="orderBy"
-                        className="w-60 bg-grey py-2 px-6 rounded-md text-md font-bold "
-                        defaultValue={'NAME_ASC'}
-                    >
-                        <option disabled value="" className="text-textBlack">
-                            {_t('search.sort')}
-                        </option>
-                        <option value="PRICE_ASC">{_t('search.price.lowToHigh')}</option>
-                        <option value="PRICE_DESC">{_t('search.price.highToLow')}</option>
-                        <option value="NAME_ASC">{_t('search.name.ascending')}</option>
-                        <option value="NAME_DESC">{_t('search.name.descending')}</option>
-                        <option value="STOCK_ASC">{_t('search.stock.ascending')}</option>
-                        <option value="STOCK_DESC">{_t('search.stock.descending')}</option>
-                    </select>
-                </label>
                 {manager.sliders[0] ? (
                     <KlevuPriceRangeFilter
                         min={parseFloat(manager.sliders[0].min)}
