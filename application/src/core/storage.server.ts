@@ -50,8 +50,8 @@ function createMemoryStorageEngine(dsn: string, options: StorageOptions = {}): B
  * @param options Object with options: prefix
  */
 export function configureStorage(dsn: string | undefined, options: StorageOptions = {}): BackendStorage {
-    if (dsn?.startsWith?.('memory://')) {
+    //if (dsn?.startsWith?.('memory://')) {
         return createMemoryStorageEngine(dsn, options);
-    }
-    return createRedisStorageEngine(dsn, options);
+    //}
+    //return createRedisStorageEngine(dsn, options);
 }
