@@ -1,8 +1,24 @@
-import { Filter } from '../components/search';
+import { Filter } from '../components/search/filter';
 import { FilteredProducts } from '../components/search/filtered-products';
 import { Grid } from '../components/grid/grid';
 import { Category } from '../../use-cases/contracts/Category';
 import { ProductSlim } from '../../use-cases/contracts/Product';
+import {
+    FilterManager,
+    KlevuApiRawResponse,
+    KlevuDomEvents,
+    KlevuFetch,
+    KlevuFetchResponse,
+    KlevuHydratePackedFetchResult,
+    KlevuListenDomEvent,
+} from '@klevu/core';
+import { categoryQuery } from '~/use-cases/search/categoryMerchandising';
+import { useEffect, useState } from 'react';
+import KlevuProductToSlimProducts from '~/use-cases/mapper/Object/KlevuProductToSlimProducts';
+import { KlevuFilter } from '../components/search/klevu-filter';
+
+const manager = new FilterManager();
+let run = false;
 
 export default ({
     data,
@@ -11,9 +27,38 @@ export default ({
         category: Category;
         products: ProductSlim[];
         priceRangeAndAttributes: any;
+        klevu: KlevuApiRawResponse;
+        folder: string;
     };
 }) => {
-    const { category, products, priceRangeAndAttributes } = data;
+    const { category, klevu, folder } = data;
+    const [result, setKlevuResult] = useState<KlevuFetchResponse | undefined>(undefined);
+
+    const unpackServerResults = async () => {
+        setKlevuResult(
+            await KlevuHydratePackedFetchResult(
+                klevu,
+                categoryQuery('women' /* replace with folder */, category.title, 0, manager),
+            ),
+        );
+    };
+
+    const doFrontEndSearch = async () => {
+        const res = await KlevuFetch(...categoryQuery('women' /* replace with folder */, category.title, 0, manager));
+        setKlevuResult(res);
+    };
+
+    useEffect(() => {
+        if (run) {
+            return;
+        }
+        run = true;
+        unpackServerResults();
+
+        document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, (e) => {
+            doFrontEndSearch();
+        });
+    }, []);
 
     return (
         <>
@@ -27,8 +72,10 @@ export default ({
                 </div>
             )}
             <div className={`container 2xl mt-2 px-5 mx-auto w-full ${category.hero ? 'mt-20 pt-10' : ''}`}>
-                <Filter aggregations={priceRangeAndAttributes} />
-                <FilteredProducts products={products} />
+                <KlevuFilter manager={manager} />
+                <FilteredProducts
+                    products={result?.queriesById('merc')?.records.map((p) => KlevuProductToSlimProducts(p)) ?? []}
+                />
             </div>
         </>
     );
