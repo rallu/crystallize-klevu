@@ -18,7 +18,6 @@ import KlevuProductToSlimProducts from '~/use-cases/mapper/Object/KlevuProductTo
 import { KlevuFilter } from '../components/search/klevu-filter';
 
 const manager = new FilterManager();
-let run = false;
 
 export default ({
     data,
@@ -49,15 +48,15 @@ export default ({
     };
 
     useEffect(() => {
-        if (run) {
-            return;
-        }
-        run = true;
         unpackServerResults();
 
-        document.addEventListener(KlevuDomEvents.FilterSelectionUpdate, (e) => {
+        const stop = KlevuListenDomEvent(KlevuDomEvents.FilterSelectionUpdate, (e) => {
             doFrontEndSearch();
-        });
+        })
+
+        return () => {
+            stop()
+        }
     }, []);
 
     return (
