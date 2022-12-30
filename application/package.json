@@ -25,7 +25,6 @@
         "@crystallize/reactjs-hooks": "^0.7.1",
         "@klevu/core": "^1.8.0",
         "@klevu/ui-react": "^0.0.16",
-        "@react-pdf/renderer": "^3",
         "@rehooks/local-storage": "^2.4.4",
         "@remix-run/node": "^1.8.2",
         "@remix-run/react": "^1.8.2",
@@ -67,12 +66,6 @@
         "postcss": "^8.4.20",
         "tailwindcss": "^3.2",
         "typescript": "^4.9.4"
-    },
-    "overrides": {
-        "@react-pdf/renderer": {
-            "react": "^18",
-            "react-dom": "^18"
-        }
     },
     "engines": {
         "node": ">=16"

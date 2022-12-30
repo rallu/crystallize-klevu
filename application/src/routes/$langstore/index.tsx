@@ -10,7 +10,7 @@ import LandingPage from '~/ui/pages/LandingPage';
 import dataFetcherForShapePage from '~/core/dataFetcherForShapePage.server';
 
 export let meta: MetaFunction = ({ data }) => {
-    return buildMetas(data.data);
+    return buildMetas(data?.data ?? {});
 };
 
 export const headers: HeadersFunction = ({ parentHeaders, loaderHeaders }) => {
