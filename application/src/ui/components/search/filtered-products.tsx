@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { useAppContext } from '../../app-context/provider';
 import { Product } from '../../components/item/product';
 import { ProductSlim } from '~/use-cases/contracts/Product';
+import { KlevuRecord } from '@klevu/core';
 
-export const FilteredProducts: React.FC<{ products: ProductSlim[] }> = ({ products }) => {
+export const FilteredProducts: React.FC<{
+    products: ProductSlim[];
+    onProductClick?: (product: ProductSlim) => void;
+}> = ({ products, onProductClick }) => {
     let [checked, setChecked] = useState(true);
     const { _t } = useAppContext();
     const displayableProducts = checked ? products : products.filter((product) => product.variant.isDefault === true);
@@ -29,7 +33,7 @@ export const FilteredProducts: React.FC<{ products: ProductSlim[] }> = ({ produc
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 {displayableProducts.map((product, index) => (
-                    <Product key={index} item={product} />
+                    <Product key={index} item={product} onProductClick={onProductClick} />
                 ))}
             </div>
         </div>

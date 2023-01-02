@@ -6,7 +6,7 @@ import { Price } from '../price';
 import { ProductSlim } from '~/use-cases/contracts/Product';
 import { DataMapper } from '~/use-cases/mapper';
 
-export const Product: React.FC<{ item: ProductSlim }> = ({ item }) => {
+export const Product: React.FC<{ item: ProductSlim, onProductClick?: (product: ProductSlim) => void }> = ({ item, onProductClick }) => {
     const { state, path } = useAppContext();
     const { percent: discountPercentage } = displayPriceFor(
         item.variant,
@@ -22,6 +22,9 @@ export const Product: React.FC<{ item: ProductSlim }> = ({ item }) => {
             to={path(item.path)}
             prefetch="intent"
             className="grid grid-rows-[1fr_minmax(25px_50px)_40px] place-items-stretch w-full min-h-full justify-stretch items-stretch relative product-link"
+            onClick={() => {
+                onProductClick?.(item)
+            }}
         >
             {discountPercentage > 0 && (
                 <div className="absolute top-3 right-2 bg-green2 items-center flex z-[20] justify-center rounded-full w-[45px] h-[45px] text-[#fff] text-sm">

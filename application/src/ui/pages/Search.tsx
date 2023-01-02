@@ -69,6 +69,7 @@ export default ({ data }: { data: { response: KlevuApiRawResponse; searchTerm: s
                 <KlevuFilter manager={manager} />
                 <FilteredProducts
                     products={products.map((p) => KlevuProductToSlimProducts(p)) ?? []}
+                    onProductClick={(item) => result?.getSearchClickSendEvent?.()(item.id, item.variant.id)}
                 />
             </div>
         </>
