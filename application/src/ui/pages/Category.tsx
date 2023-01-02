@@ -74,6 +74,9 @@ export default ({
                 <KlevuFilter manager={manager} />
                 <FilteredProducts
                     products={result?.queriesById('merc')?.records.map((p) => KlevuProductToSlimProducts(p)) ?? []}
+                    onProductClick={(item) => {
+                        result?.queriesById('merch')?.getCategoryMerchandisingClickSendEvent?.()(item.id, category.title, item.variant.id)
+                    }}
                 />
             </div>
         </>
