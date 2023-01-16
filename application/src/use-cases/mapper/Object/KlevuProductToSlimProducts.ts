@@ -12,10 +12,12 @@ export default (product: KlevuRecord): ProductSlim => {
     }
   }
 
+  const path = "/"  + product.url.split("/").slice(4).join("/")
+
   return {
     id: product.itemGroupId,
     name: product.name,
-    path: product.url,
+    path,
     topics: [],
     variant: {
       id: product.id,

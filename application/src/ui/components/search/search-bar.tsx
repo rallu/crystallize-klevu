@@ -11,9 +11,8 @@ export const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [show, setShow] = useState(true);
     const [searchResult, setSearchResult] = useState<KlevuFetchResponse | undefined>(undefined);
-    const [suggestions, setSuggestions] = useState<ProductSlim[]>([]);
     const { state: appContextState, path, _t } = useAppContext();
-    const apiClient = createClient({ tenantIdentifier: appContextState.crystallize.tenantIdentifier });
+    //const apiClient = createClient({ tenantIdentifier: appContextState.crystallize.tenantIdentifier });
     //close dropdown on outside click
     useEffect(() => {
         const handleClickOutside = (event: any) => {
@@ -47,6 +46,10 @@ export const SearchBar = () => {
         }
     };
 
+    const urlToPath = (url: string) => {
+        return "/" + url.split("/").slice(4).join("/")
+    }
+
     return (
         <div className="xl:w-[340px] md:px-4 relative 270px">
             <div className="relative z-30 flex items-center justify-between bg-grey h-10 rounded-full overflow-hidden focus-within:border">
@@ -75,7 +78,7 @@ export const SearchBar = () => {
                         {searchResult.queriesById('search')?.records.map((s, index) => (
                             <div key={index}>
                                 <Link
-                                    to={path(s.url)}
+                                    to={path(urlToPath(s.url))}
                                     onClick={() => {
                                         searchResult.queriesById('search')?.getSearchClickSendEvent?.()(
                                             s.id,

@@ -4,8 +4,8 @@ import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 
 KlevuConfig.init({
-    url: "https://eucs23v2.ksearchnet.com/cs/v2/search",
-    apiKey: "klevu-160320037354512854",
+    url: "https://eucs31v2.ksearchnet.com/cs/v2/search",
+    apiKey: "klevu-167354475363515954",
 })
 
 function hydrate() {

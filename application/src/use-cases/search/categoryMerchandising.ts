@@ -3,7 +3,7 @@ import {
     FilterManager,
     listFilters,
     categoryMerchandising,
-    sendMerchandisingViewEvent,
+    sendMerchandisingViewEvent
 } from '@klevu/core';
 
 export function categoryQuery(category: string, categoryTitle: string, pageIndex: number, manager: FilterManager) {

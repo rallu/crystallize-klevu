@@ -35,7 +35,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const data: any = await dataFetcherForShapePage('category', path, requestContext, params);
 
     const result = await KlevuFetch(
-        ...categoryQuery('women' /* replace with: params.folder*/, data.category.title, 0, new FilterManager()),
+        ...categoryQuery(`shop;${params.folder}`, data.category.title, 0, new FilterManager()),
     );
     const klevu = KlevuPackFetchResult(result);
 
